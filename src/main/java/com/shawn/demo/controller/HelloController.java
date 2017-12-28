@@ -16,8 +16,8 @@ import com.shawn.demo.service.PersonService;
 @RestController()
 public class HelloController {
 	
-	private Logger logger = Logger.getLogger(getClass());
-	private Logger jk = Logger.getLogger("jk");
+	private final static Logger logger = Logger.getLogger(HelloController.class);
+	private final static Logger jk = Logger.getLogger("jk");
 
 	@Autowired
 	private PersonService ps;
