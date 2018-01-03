@@ -29,22 +29,31 @@ public class PersonTest {
 
 	@Value("${server.address}")
 	private String address;
-	
+
 	@Value("${server.port}")
 	private int port;
 
-	@Test
-	public void personGetByIDRest() {
-		Person person = restTemplate.getForObject("http://" + address + ":" + port + "/person/get/1", Person.class);
-		assertNotNull(person);
-		assertEquals("王五", person.getName());
-	}
+	// @Test
+	// public void personGetByIDRest() {
+	// Person person = restTemplate.getForObject("http://" + address + ":" + port +
+	// "/person/get/1", Person.class);
+	// assertNotNull(person);
+	// assertEquals("王五", person.getName());
+	// }
+	//
+	// @Test
+	// public void personGetByIDService() throws Exception {
+	// Person person = ps.get(Long.valueOf(1));
+	// assertNotNull(person);
+	// assertEquals(Integer.valueOf(1), person.getAge());
+	// }
 
 	@Test
-	public void personGetByIDService() throws Exception {
-		Person person = ps.get(Long.valueOf(1));
-		assertNotNull(person);
-		assertEquals(Integer.valueOf(1), person.getAge());
+	public void personGetByIDRedis() throws Exception {
+		Person person = new Person();
+		person.setName("aaa");
+		Person rs = ps.createByRedis(person);
+		assertEquals("aaa", rs.getName());
 	}
 
 }
