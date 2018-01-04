@@ -13,7 +13,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-import com.shawn.demo.domain.Person;
+import com.shawn.demo.domain.po.Person;
 import com.shawn.demo.service.PersonService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -48,12 +48,5 @@ public class PersonTest {
 	// assertEquals(Integer.valueOf(1), person.getAge());
 	// }
 
-	@Test
-	public void personGetByIDRedis() throws Exception {
-		Person person = new Person();
-		person.setName("aaa");
-		Person rs = ps.createByRedis(person);
-		assertEquals("aaa", rs.getName());
-	}
 
 }
