@@ -6,7 +6,7 @@ import java.util.List;
 public class PageVO<T> implements Serializable {
 	private static final long serialVersionUID = -2940983877096774934L;
 
-	private List<T> data;
+	private List<T> list;
 
 	private long pageIndex; // 当前页
 	private long firstResult; // 当前页的起始记录
@@ -95,17 +95,17 @@ public class PageVO<T> implements Serializable {
 		return totalPage;
 	}
 
-	public List<T> getData() {
-		return data;
+	public List<T> getList() {
+		return list;
 	}
 
-	public void setData(List<T> data) {
-		this.data = data;
+	public void setList(List<T> list) {
+		this.list = list;
 	}
 
 	@Override
 	public String toString() {
-		return "Page [data=" + data + ", firstResult=" + firstResult + ", nextPage=" + nextPage + ", pageIndex="
+		return "Page [list=" + list + ", firstResult=" + firstResult + ", nextPage=" + nextPage + ", pageIndex="
 				+ pageIndex + ", pageSize=" + pageSize + ", previousPage=" + previousPage + ", totalPage=" + totalPage
 				+ ", totalResults=" + totalResults + "]";
 	}

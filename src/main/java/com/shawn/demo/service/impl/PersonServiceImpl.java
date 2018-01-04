@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shawn.demo.dao.PersonMapper;
 import com.shawn.demo.domain.po.Person;
+import com.shawn.demo.domain.vo.PageVO;
 import com.shawn.demo.service.PersonService;
 
 @Component
@@ -20,31 +21,34 @@ import com.shawn.demo.service.PersonService;
 public class PersonServiceImpl implements PersonService {
 
 	@Autowired
-	private PersonMapper pm;
+	private PersonMapper personDao;
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
 
 	@Override
 	@Cacheable(value = "person", key = "#id")
-	public Person get(Long id) throws Exception {
-		Person person = pm.getById(id);
+	public Person get(long id) throws Exception {
+		Person person = personDao.getById(id);
 		return person;
 	}
 
 	@Override
 	@Cacheable(value = { "person" })
 	@Transactional(readOnly = true)
-	public List<Person> getAll() throws Exception {
-		List<Person> list = null;
-		list = pm.getAll();
-		return list;
+	public PageVO<Person> page(long pageIndex, int pageSize) throws Exception {
+		PageVO<Person> page = new PageVO<Person>(pageIndex,pageSize);
+		List<Person> list = personDao.page(pageIndex, pageSize);
+		long count = personDao.getTotalCount();
+		page.setTotalResults(count);
+		page.setList(list);
+		return page;
 	}
 
 	@Override
 	@CacheEvict(value = "person", allEntries = true)
 	public Person update(Person person) throws Exception {
-		pm.update(person);
-		person = pm.getById(person.getId());
+		personDao.update(person);
+		person = personDao.getById(person.getId());
 		return person;
 	}
 
