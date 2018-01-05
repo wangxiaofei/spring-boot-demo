@@ -2,7 +2,7 @@ package com.shawn.demo.common;
 
 public enum EnumResultCode {
 
-	SUCCESS("200", "成功"), SUCCESS_NODATA("201", "成功，无数据"), FAIL("500", "服务器错误");
+	SUCCESS("200", "成功"), SUCCESS_NODATA("201", "成功，无数据"), FAIL("500", "服务器内部错误");
 
 	private String code;
 	private String desc;
